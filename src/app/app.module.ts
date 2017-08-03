@@ -10,7 +10,18 @@ import {AppComponent} from './app.component';
   entryComponents: [AppComponent],
 })
 export class AppModule {
-  ngDoBootstrap(appRef: ApplicationRef) {
-    appRef.bootstrap(AppComponent);
+  ngDoBootstrap(app: ApplicationRef) {
+    this.bootstrapRootComponent(app, 'app-posts');
+  }
+
+  bootstrapRootComponent(app: ApplicationRef, name: string) {
+    const options = {
+      'app-posts': AppComponent,
+    };
+
+    const queryElement = document.querySelector(`${name}`);
+    if (!!queryElement) {
+      app.bootstrap(options[name]);
+    }
   }
 }
